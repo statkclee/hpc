@@ -13,11 +13,10 @@ title: $100 달러 오픈 슈퍼 컴퓨터
 ## 고성능 컴퓨팅[^1] 개발
 
 1. 고성능 컴퓨팅 기초
-    - []()
+    - [원격 작업 (Working Remotely)](basic-ssh.html)
 1. 슈퍼 컴퓨터 하드웨어
     - [RPi 슈퍼 컴퓨터](rpi-super-computer.html)
 1. 고성능 컴퓨팅 참고서적
-    - 
 
 > ## 참고 자료 {.prereq}
 > - [컴퓨터 과학 언플러그드](http://unplugged.xwmooc.org)  

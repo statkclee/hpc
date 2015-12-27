@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: $100 달러 오픈 슈퍼 컴퓨터</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-59802572-7', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://xwmooc.net" title="xwMOOC">
+          <img alt="xwMOOC banner" src="img/xwMOOC.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h1 class="title">$100 달러 오픈 슈퍼 컴퓨터</h1>
+          <h2 class="subtitle">원격 작업 (Working Remotely)[^1]</h2>
+<section class="objectives panel panel-warning">
+<div class="panel-heading">
+<h2 id="학습-목표"><span class="glyphicon glyphicon-certificate"></span>학습 목표</h2>
+</div>
+<div class="panel-body">
+<ul>
+<li>원격으로 컴퓨터에 접속한다.</li>
+<li>시큐어 쉘(SSH)을 사용한다.</li>
+<li>공개 열쇠 암호화를 사용하여 원격 컴퓨터에 접속한다.</li>
+<li>추가 보안 설정을 수행하고, 다수 컴퓨터에 접속한다.</li>
+</ul>
+</div>
+</section>
+<p>일반 PC와 노트북 컴퓨터를 사용할 때 무슨 일이 발생하는지 좀더 자세히 살펴보자. 첫번째 단계는 컴퓨터에 로그인(login)한다. 그러면 운영체계(Operating System, OS)가 사용자가 누구인지 확인하고 무슨 작업을 허락할 것이지 준비한다. 사용자 이름과 비밀번호를 입력해서 상기 작업을 수행한다; 운영체제가 시스템 레코드 값을 확인하고, 만약 일치한다면 사용자를 위해 쉘(Shell)을 실행한다.</p>
+<p>명령어를 타이핑할 때, 타이핑하는 문자를 표현하는 0과 1이 키보드에서 쉘로 전송된다. 쉘은 화면에 사용자가 타이핑하는 것을 화면에 출력한다. 그리고 나서, 만약 타이핑한 것이 명령어라면, 쉘이 실행을 하고 나서 (출력 결과가 있다면) 산출결과를 화면에 출력한다.</p>
+<div class="figure">
+<img src="fig/ssh-direct-shell-usage.png" alt="직접 쉘 사용하는 방법" />
+<p class="caption">직접 쉘 사용하는 방법</p>
+</div>
+<p>실험결과 데이터베이스를 관리하는 지하실 서버같은 또다른 컴퓨터에 명령어를 실행하고자 한다면 어떨까? 이를 위해서, 먼저 해당 컴퓨터에 로그인해야 한다. 이를 <strong>원격 로그인(remote login)</strong>이라고 부르고, 해당 컴퓨터를 <strong>원격 컴퓨터(remote machine)</strong>라고 한다. 원격 로그인하게 되면, 타이핑하는 모든 것은 원격 컴퓨터에서 실행되고 있는 쉘에 전달된다. 쉘과 상호작용(interact)하면 마치 로컬 컴퓨터 쉘과 마찬가지로 명령어를 실행하게 된다. 그러고 나면, 로컬 컴퓨터 화면에 출력결과를 표시해준다.</p>
+<div class="figure">
+<img src="fig/ssh-remote-shell-usage.png" alt="원격 쉘 사용하는 방법" />
+<p class="caption">원격 쉘 사용하는 방법</p>
+</div>
+<p>원격 로그인하는데 사용하는 도구가 <strong>시큐어 쉘(secure shell, SSH)</strong>이다. 특히, <code>ssh username@computer</code> 명령어는 SSH를 실행하고 사용자가 지정한 원격 컴퓨터에 접속한다. 로그인한 후에는 원격쉘을 사용해서 원격 컴퓨터에 있는 파일과 디렉토리를 사용한다. <code>exit</code>을 타이핑하거나 컨트롤+D(<code>CTRL+D</code>)를 누르게 되면, 원격 쉘을 종료하고 이전 쉘로 돌아온다. 다음 예제에서, 원격쉘과 상호작용이 나타나 있다. 또한, <code>$</code> 대신에 원격 컴퓨터 명령 프롬프트가 <code>moon&gt;</code>임을 볼 수 있고 Vlad가 비밀번호를 기억하려고 몇번 시도한 것도 나타나 있다.</p>
+<pre class="input"><code>$ pwd
+/users/vlad
+
+$ ssh vlad@moon
+Password: ***
+Access denied
+Password: ********
+moon&gt; pwd
+/home/vlad
+moon&gt; ls -F
+bin/     cheese.txt   dark_side/   rocks.cfg
+moon&gt; exit
+
+$ pwd
+/users/vlad</code></pre>
+<p>시큐어쉘은 이전 <code>rsh</code>로 불리는 프로그램과 대조되게 “시큐어(secure)”로 불린다. 옛날에 모든 사람이 서로를 신뢰했고 이름만으로 컴퓨터에 있는 모든 정보를 알고 있었을 때, 네트워크를 통해서 전송할 때 가장 민감한 정보를 제외하고 어떤것도 암호화하지 않았다. 하지만, 이와 같은 방식이 의미하는 것이 악한이 네트워크 통신을 지켜볼 수 있고, 사용자 이름과 비밀번호를 훔칠 수도 있고, 악의적인 방식으로도 사용할 수 있다는 것이다. SSH가 발명되어 이런 부정적인 면을 방지하거나 적어도 늦출 수도 있다. SSH는 몇가지 정교하며 오랜 기간 테스트된 암화화 프로토콜을 사용해서 외부인이 서로다른 두 컴퓨터 사이에 오고가는 메시지 내용을 볼 수 없게 확실히 한다. <a href="security.html">다음 장</a>에서 SSH가 동작하는 방식을 논하고 실제로 얼마나 보안이 좋은지 살펴본다.</p>
+<p><code>ssh</code>는 <code>scp</code>라는 짝꿍 프로그램이 있는데 “보안 복사(Secure Copy)”를 표현하는 명령어다. SSH와 동일한 유형의 네트워크 연결을 사용해서, 원격 컴퓨터로 혹은 원격 컴퓨터로부터 파일을 복사할 수 있게 한다. 구문(syntax)은 <code>cp</code>와 <code>ssh</code>를 섞은 것이다. 파일을 복사하기 위해서, 원천(source)과 목표(destination) 경로를 지정하는데 컴퓨터 이름을 포함할 수도 있다. 만약 컴퓨터 이름을 생략하면, <code>ssh</code>는 지금 실행되고 있는 컴퓨터를 의미한다고 가정한다. 예를 들어, 다음 명령어는 가장 최근 실험결과 (results.dat)를 지하실 백업서버에 복사한다. 복사할 때, 진행경과가 화면에 출력된다.</p>
+<pre class="input"><code>$ scp results.dat vlad@backupserver:backups/results-2011-11-11.dat
+Password: ********
+results.dat              100%  9  1.0 MB/s 00:00</code></pre>
+<p>전체 디렉토리를 복사하는 것도 유사하다: <code>-r</code> 옵션을 사용해서 복사를 재귀적으로 수행하고 싶다고 신호를 전달하면 된다. 예를 들어, 다음 명령어는 백업 서버에서 모든 작업결과물을 사용자 노트북으로 복사한다.</p>
+<pre class="input"><code>$ scp -r vlad@backupserver:backups ./backups
+Password: ********
+results-2011-09-18.dat              100%  7  1.0 MB/s 00:00
+results-2011-10-04.dat              100%  9  1.0 MB/s 00:00
+results-2011-10-28.dat              100%  8  1.0 MB/s 00:00
+results-2011-11-11.dat              100%  9  1.0 MB/s 00:00</code></pre>
+<p>이제 백업서버에 <code>backups/results-2011-11-12.dat</code> 파일을 이미 생성했는지 확인하고자 한다고 가정하자. 로그인하고 난 다음에 <code>ls</code>를 타이핑하는 대신에 다음과 같이 동일한 것을 수행한다.</p>
+<pre class="input"><code>$ ssh vlad@backupserver ls results
+Password: ********
+results-2011-09-18.dat  results-2011-10-28.dat
+results-2011-10-04.dat  results-2011-11-11.dat</code></pre>
+<p>SSH는 사용자 이름과 실행하려고 하는 컴퓨터 이름 뒤에 인자를 받아서 원격 컴퓨터에 있는 쉘에 명령어를 전달한다. 상기 전달 인자가 적합한 명령어이기 때문에, 원격 쉘이 사용자를 대신해서 <code>ls results</code>을 실행하고 실행결과를 다시 로컬 쉘에 화면출력한다.</p>
+<h3 id="열쇠키-생성과-관리">열쇠(키) 생성과 관리</h3>
+<p>원격 컴퓨터에 접속할 때마다 비밀번호를 매번 타이핑하는 것은 사소한 성가심 이상이다. 만약 원격 컴퓨터에 세가지 다른 매개변수 조합을 갖는 프로그램을 실행하고자 한다면 무슨 일이 발생할지 상상해보라. 다음과 같은 것을 수행하고자 한다.</p>
+<pre class="input"><code>for density in {20..29}
+do
+  for viscosity in 0.70 0.71 0.72 0.73 0.74
+  do
+    for temperature in 0.001 0.002 0.003 0.004 0.005
+    do
+      ssh vlad@fastmachine ./simulation -x -d $density -v $viscosity -v $temperature
+    done
+  done
+done</code></pre>
+<p>하지만, 상기 작업을 사실상 수행하고자 한다면, 자리에 앉아서 키보드로 비밀번호를 250번 타이핑해야 할 것이다. 원하는 바는 자동으로 원격 컴퓨터에 인증하는 방법을 찾는 것이다.</p>
+<p><a href="gloss.html#public-key-cryptography">공개 열쇠 암호화(public key cryptography)</a> 방식에서 가져온 기술을 사용해서 상기 문제를 해결할 수 있다. 좀더 구체적으로, <a href="gloss.html#public-key">공개 열쇠(public key)</a>와 <a href="gloss.html#private-key">개인 열쇠 (private key)</a>로 구성된 <a href="gloss.html#key-pair">열쇠 쌍(key pair)</a>을 생성한다. 이렇게 생성된 열쇠는 두가지 흥미로운 특성이 있다:</p>
+<ol style="list-style-type: decimal">
+<li>어느 한 열쇠가 암호화한 것은 다른 열쇠가 암호를 풀 수 있다. 예를 들어, 만약 개인 열쇠로 비밀번호를 암호화했다면, 해당 공개 열쇠만 암호를 풀 수 있다. 만약 공개 열쇠로 파일 내용을 암호화했다면, 상응하는 개인 열쇠만 암호를 풀 수 있다.</li>
+<li>한 열쇠가 주어진 상태에서, 다른 열쇠를 찾는 것은 실질적으로 불가능하다. 여기서 “실질적으로 불가능”하다는 의미는 “우리가 마음속으로 상상하는 어떤 컴퓨터를 사용해서 우주 기대수명내에 풀 수는 없다”는 것이다. (하지만, 양자컴퓨팅이 하루만에 이것을 바꿀 수도 있다-자세한 내용은 근처 다소 몽상적인 물리학자와 상의하세요.)</li>
+</ol>
+<p>열쇠쌍을 생성하게 되면, 접속하려는 원격 컴퓨터에 공개 열쇠를 저장하고, 로컬 컴퓨터에 개인 열쇠를 보관한다. SSH는 열쇠가 예상하는 곳에 놓기만 하면, 비밀번호를 묻는 대신에 열쇠를 사용한다.</p>
+<p>첫번째 단계는 열쇠쌍을 생성하는 것인데, <code>ssh-keygen</code>을 사용해서 열쇠쌍을 생성한다.</p>
+<pre class="input"><code>$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/users/vlad/.ssh/id_rsa): ↵
+Enter passphrase (empty for no passphrase): ↵
+Your identification has been saved in /users/vlad/.ssh/id_rsa.
+Your public key has been saved in /users/vlad/.ssh/id_rsa.pub.
+The key fingerprint is: d3:1a:27:38:aa:54:e8:a5:03:db:79:2f:b2:c3:c9:3d</code></pre>
+<p><code>-t rsa</code> 옵션은 <code>ssh-keygen</code>에게 RSA키 열쇠를 생성하게 한다; 다른 유형도 있지만, 가장 흔하게 사용되는 것이다. “↵” 문자는 복귀(carriage return, CR) 문자다: 기본설정된 디폴트 장소에 열쇠를 저장한다는 것으로 SSH가 열쇠를 어디서 찾는지 알게 되고, 패스프레이즈(passphrase)도 원하지 않는다(패스프레이즈를 원치 않는 이유는 패스워드를 타이핑하지 않고 로그인하는 것이 요점이기 때문이다). 그래서, 두 질문에 단지 엔터만 치게된다.</p>
+<p>홈 디렉토리 아래 <code>.ssh</code> 디렉토리 내부를 살펴보자.</p>
+<pre class="input"><code>$ cd
+$ ls .ssh
+id_rsa  id_rsa.pub</code></pre>
+<p>첫번째 <code>id_rsa</code> 파일은 개인 열쇠 정보를 담고 있다. 절대 원격 컴퓨터에 저장하거나, 전자우편으로 전송하거나, 다른 누구와도 공유하지 마라. (타인이 당신을 가장하여 무언가 수행하는 것을 정말 원하지 않는다면) 다른 파일 <code>id_rsa.pub</code>은 매칭되는 공개 열쇠 정보를 담고 있다. 이 파일을 복사해서 접속하려는 원격 컴퓨터에 복사한다.</p>
+<pre class="input"><code>$ scp .ssh/id_rsa.pub vlad@fastmachine:id_rsa.pub
+Password: ********
+id_rsa.pub              100%  1  1.0 MB/s 00:00</code></pre>
+<p>여전히 비밀번호를 타이핑해야 하는데 이유는 공개 열쇠가 <code>scp</code>를 실행할 때 원격 컴퓨터에 올바른 장소에 위치하지 않아서 그렇다. 원격 컴퓨터에 로그인해서 <code>.ssh</code> 디렉토리를 거기에 생성해서 문제를 해결해보자.</p>
+<pre class="input"><code>$ ssh vlad@fastmachine
+Password: ********
+
+$ mkdir .ssh</code></pre>
+<p>다음 단계는 공개 열쇠를 <code>authorized_keys</code>로 불리는 <code>.ssh</code> 디렉토리에 파일로 복사한다:</p>
+<pre class="input"><code>$ cp id_rsa.pub .ssh/authorized_keys</code></pre>
+<p>마지막 단계는 권한이 적절하게 <code>.ssh</code> 와 <code>authorized_keys</code>에 설정되었는지 확실히 한다. 이것은 추가적인 보안 안전 조치다: 만약 사용자를 제외한 타인이 읽거나 변경한다면, SSH는 더 이상 보안이 확실하지 않다고 가정한다. 올바른 권한은 다음과 같다:</p>
+<ul>
+<li>소유자(Owner)는 <code>.ssh</code> 디렉토리에 읽기, 쓰기, 실행 권한을 갖는다.</li>
+<li>소유자는 <code>.ssh/authorized_keys</code>에 대해서 읽기, 쓰기 권한을 갖는다.</li>
+<li>그밖의 누구도 어떤 권한을 갖지 않는다.</li>
+</ul>
+<p>올바른 명령어는 다음과 같다:</p>
+<pre class="input"><code>$ chmod u=rwx,g=,o= .ssh
+$ chmod u=rw,g=,o= .ssh/authorized_keys</code></pre>
+<p>이제 모든 권한 설정이 되었다. 원격쉘에서 빠져나와 모든 것이 정상적으로 동작하는지 살펴보기 위해서 다음 명령어를 실행한다:</p>
+<pre class="input"><code>$ exit
+$ ssh vlad@fastmachine pwd
+/home/vlad</code></pre>
+<p>열쇠를 생성하고 설치한 뒤에 두 컴퓨터 모습이 다음에 나와 있다.</p>
+<div class="figure">
+<img src="fig/ssh-public-private-keys.png" alt="공개열쇠/개인열쇠" />
+<p class="caption">공개열쇠/개인열쇠</p>
+</div>
+<p>이제 매번 비밀번호 인증절차를 거치지 않고 로컬 컴퓨터에서 원격 컴퓨텅에 <code>ssh</code> (그리고 <code>scp</code>) 명령을 실행할 수 있다. 하지만, 상기 설정은 일방향으로만 동작한다: 원격 컴퓨터 <code>authorized_keys</code> 파일에 설치한 공개키가 사용자가 위치한 로컬 컴퓨터에 로그인 할 수 있는 권한을 부여한 것은 <em>아니다</em>. 만약 원격 컴퓨터에서 로컬 컴퓨터로 접속하려면, 원격 컴퓨터에서 열쇠쌍을 생성하고 <code>id_rsa.pub</code>을 로컬 컴퓨터 <code>authorized_keys</code> 파일로 복사한다.</p>
+<p>만약 다른 여러대 컴퓨터에 접속하려면 어떨까? 예를 들어, 백업 서버에서 로컬 노트북 컴퓨터로, 데스크탑 PC로, 연구실 컴퓨터로, 혹은 반대로 파일을 복사한다고 가정하자. 이를 처리하기 위해서, 각 컴퓨터에 있는 <code>id_rsa.pub</code> 파일을 원격 컴퓨터 <code>.ssh/authorized_keys</code> 파일에 추가한다. 편집기를 사용해서 수행하거나, 혹은 좀더 간단하게 <code>cat</code>과 <code>&gt;&gt;</code>을 사용해서 한 파일을 다른 파일에 덧붙인다.</p>
+<pre class="input"><code>$ scp id_rsa.pub vlad@backupserver
+Password: ********
+
+$ ssh vlad@backupserver
+Password: ********
+
+$ cat id_rsa.pub &gt;&gt; .ssh/authorized_keys
+
+$ rm id_rsa.pub
+
+$ exit</code></pre>
+<h3 id="원격-컴퓨터-접속-사례-클라우드-소프트레이어-서버-접속">원격 컴퓨터 접속 사례 : 클라우드 소프트레이어 서버 접속</h3>
+<p>먼저 윈도 환경 <code>Git Bash</code>를 통해서 바로 <code>ssh-keygen -t rsa</code> 명령어를 입력해서 공개열쇠와 개인열쇠를 생성한다. 열쇠쌍은 <code>c:\Users\admin\.ssh\id_rsa</code>에 생성된다.</p>
+<pre class="input"><code>$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/admin/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/admin/.ssh/id_rsa.
+Your public key has been saved in /c/Users/admin/.ssh/id_rsa.pub.
+The key fingerprint is:
+8d:09:...
+admin@STATKCLEE</code></pre>
+<p>이제 소프트레이어 가상컴퓨터에 접속한다. 디바이스 목록에서 <code>rstudio.xwmooc.net</code> 이름을 갖는 가상컴퓨터의 IP 주소 <code>169.54.243.36</code>에 로그인한다. 물론 비밀번호를 입력해야 한다.</p>
+<pre class="input"><code>$ ssh root@169.54.243.36
+The authenticity of host &#39;169.54.243.36 (169.54.243.36)&#39; can&#39;t be established.
+RSA key fingerprint is df:0f....
+Are you sure you want to continue connecting (yes/no)? Y
+Please type &#39;yes&#39; or &#39;no&#39;: yes
+Warning: Permanently added &#39;169.54.243.36&#39; (RSA) to the list of known hosts.
+root@169.54.243.36&#39;s password:
+Linux rstudio 2.6.32-374-ec2 #91-Ubuntu SMP Wed Dec 10 11:07:16 UTC 2014 x86_64
+GNU/Linux
+Ubuntu 10.04.4 LTS
+
+Welcome to Ubuntu!
+ * Documentation:  https://help.ubuntu.com/
+Last login: Wed Apr 29 02:33:51 2015 from 222.99.61.77
+root@rstudio:~#</code></pre>
+<p>로컬 컴퓨터에 있는 <code>id_rsa.pub</code> 공개열쇠를 원격 컴퓨터에 복사한다. 복사를 위해서는 <code>scp</code> 명령어를 사용해서 원격 컴퓨터에 접속하고 복사 디렉토리로 홈디렉토리(<code>~</code>)를 설정한다. <code>id_rsa.pub</code> 파일이 원격컴퓨터 홈디렉토리에 복사된 것을 <code>ls</code> 명령어를 통해서 확인한다.</p>
+<pre class="input"><code>$ scp id_rsa.pub root@169.54.243.36:~
+root@169.54.243.36&#39;s password:
+id_rsa.pub                                    100%  397     0.4KB/s   00:00
+
+admin@STATKCLEE /C/Users/admin/.ssh
+$ ssh root@169.54.243.36
+root@169.54.243.36&#39;s password:
+Linux rstudio 2.6.32-374-ec2 #91-Ubuntu SMP Wed Dec 10 11:07:16 UTC 2014 x86_64
+GNU/Linux
+Ubuntu 10.04.4 LTS
+
+Welcome to Ubuntu!
+ * Documentation:  https://help.ubuntu.com/
+Last login: Fri May 15 02:00:26 2015 from 112.216.243.234
+root@rstudio:~# ls
+=               rstudio-0.98.1103-i386.deb          rubygems-1.3.7.tgz
+id_rsa.pub      rstudio-server-0.98.1103-amd64.deb  rubygems-1.3.7.tgz.1
+lesson-example  rubygems-1.3.7                      xwmooc-sc
+root@rstudio:~#</code></pre>
+<p>원격 컴퓨터 홈디렉토리 밑에 하위디렉토로 <code>.ssh</code>를 생성한다. <code>id_rsa.pub</code> 공개열쇠 파일을 <code>.ssh/authorized_keys</code> 파일로 복사한다. 그리고 추가적인 보안 설정을 위해서 <code>.ssh</code> 디렉토리와 <code>authorized_keys</code> 파일에 권한 설정을 하고 <code>exit</code>를 타이핑해서 원격 컴퓨터 접속을 끊는다.</p>
+<pre class="input"><code>root@rstudio:~# mkdir .ssh
+root@rstudio:~# cp id_rsa.pub .ssh/authorized_keys
+root@rstudio:~# chmod u=rwx,g=,o= .ssh
+root@rstudio:~# chmod u=rw,g=,o= .ssh/authorized_keys
+root@rstudio:~# exit
+logout
+Connection to 169.54.243.36 closed.</code></pre>
+<p>이제 <code>ssh root@169.54.243.36</code> 명령어로 원격 컴퓨터에 접속한다. 패스워드를 타이핑 하지 않고 바로 로그인 된다. 마지막으로 <code>id_rsa.pub</code> 홈디렉토리에 원격 복사한 공개열쇠 파일을 삭제해서 마무리한다.</p>
+<pre class="input"><code>admin@STATKCLEE /C/_software-carpentry/xwmooc-sc (reproducible)
+$ ssh root@169.54.243.36
+Linux rstudio 2.6.32-374-ec2 #91-Ubuntu SMP Wed Dec 10 11:07:16 UTC 2014 x86_64
+GNU/Linux
+Ubuntu 10.04.4 LTS
+
+Welcome to Ubuntu!
+ * Documentation:  https://help.ubuntu.com/
+Last login: Fri May 15 02:06:05 2015 from 112.216.243.234
+root@rstudio:~# ls
+=               rstudio-0.98.1103-i386.deb          rubygems-1.3.7.tgz
+id_rsa.pub      rstudio-server-0.98.1103-amd64.deb  rubygems-1.3.7.tgz.1
+lesson-example  rubygems-1.3.7                      xwmooc-sc
+root@rstudio:~# rm id_rsa.pub</code></pre>
+<p>동일한 방식으로 IP 주소 <code>169.54.243.37</code>을 갖는 <code>shiny.xwmooc.net</code> 가상 컴퓨터에도 접속해서 비밀번호를 입력하지 않고 접속하도록 한다.</p>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://xwmooc.net">xwMOOC</a>
+        <a class="label swc-blue-bg" href="https://github.com/statkclee/raspberry-pi">Source</a>
+        <a class="label swc-blue-bg" href="mailto:i@xwmooc.net">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+  </body>
+</html>
