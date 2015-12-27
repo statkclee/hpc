@@ -1,6 +1,6 @@
 ---
 layout: page
-title: xwMOOC 컴퓨터
+title: $100 달러 오픈 슈퍼 컴퓨터
 subtitle: RPi 슈퍼 컴퓨터
 minutes: 10
 ---
