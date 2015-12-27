@@ -1,12 +1,10 @@
 ---
 layout: page
 title: $100 달러 오픈 슈퍼 컴퓨터
-subtitle: 숫자(Numbers)[^1]
+subtitle: 숫자(Numbers)
 ---
 
-[^1]: [Software Carpentry Numbers](http://swcarpentry.github.io/bc/novice/extras/09-numbers.html) 한국어 번역
-
-어떻게 숫자가 저장되는지 살펴보면서 시작해봅시다.
+컴퓨터에 어떻게 숫자가 저장되는지 살펴보면서 시작해봅시다.[^1]
 
 만약 0과 1 숫자(digit)만 두개 있다면, 양의 정수를 저장하는 자연스러운 방식은 기수(base)가 2인 이진법을 사용하는 것이다. 
 그래서, 이진수 1001<sub>2</sub> 은 십진수로 (1&times;2<sup>3</sup>)+(0&times;2<sup>2</sup>)+(0&times;2<sup>1</sup>)+(1&times;2<sup>0</sup>) = 9<sub>10</sub>이 된다.
@@ -172,3 +170,5 @@ for i in range(len(nines)):
 그리고, 만약 여러분의 것과 동일한 결과를 계산하는 프로그램을 작성한 누군가와 마주친다면, 데이터를 교환한다. 모두에게 도움이 된다.
 
 세번째 규칙은 부동 소수점수에 `==` (혹은 `!=`)을 사용하지 않는다. 다른 방식으로 계산된 두 숫자는 아마도 정확하게 같은 비트를 갖지 않을 것이다. 대신에 두 값이 특정 허용 오차 안에 있는지를 점검하고, 만약 허용 오차 안에 있다면, 같다고 처리한다. 이와 같은 것이 허용 오차를 명시적으로 설정하고, 그 자체로도 유용한다. (실험 결과에 오차 막대를 설정하는 것이 유용한 것과 마찬가지다.)
+
+[^1]: [Software Carpentry Numbers](http://swcarpentry.github.io/bc/novice/extras/09-numbers.html) 한국어 번역
