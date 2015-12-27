@@ -22,13 +22,18 @@ title: $100 달러 오픈 슈퍼 컴퓨터
 
 ### 고성능 컴퓨팅 참고 문헌
 
+#### 유튜브 동영상
 - [Build a Compact 4 Node Raspberry Pi Cluster](http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/)
-- [Raspberry Pi B+ Cluster (Super Computer)](https://www.youtube.com/watch?v=JtX9lVDsqzg)[^2] [^3] [^4][^5]
+- [Raspberry Pi B+ Cluster (Super Computer)](https://www.youtube.com/watch?v=JtX9lVDsqzg)[^2] [^3] [^4] [^5]
 
-#### 1. 파이썬
-- L. Dalcin, P. Kler, R. Paz, and A. Cosimo, Parallel Distributed Computing using Python, Advances in Water Resources, 34(9):1124-1139, 2011. http://dx.doi.org/10.1016/j.advwatres.2011.04.013
-- L. Dalcin, R. Paz, M. Storti, and J. D'Elia, MPI for Python: performance improvements and MPI-2 extensions, Journal of Parallel and Distributed Computing, 68(5):655-662, 2008. http://dx.doi.org/10.1016/j.jpdc.2007.09.005
-- L. Dalcin, R. Paz, and M. Storti, MPI for Python, Journal of Parallel and Distributed Computing, 65(9):1108-1115, 2005. http://dx.doi.org/10.1016/j.jpdc.2005.03.010
+#### 파이썬 교재
+- [Parallel Programming with Python 2014](http://www.amazon.com/Parallel-Programming-Python-Jan-Palach/dp/1783288396)
+- [Python High Performance Programming 2013](http://www.amazon.com/Python-Performance-Programming-Gabriele-Lanaro/dp/1783288450)
+- [Mastering Python High Performance 2015](http://www.amazon.com/Mastering-Python-Performance-Fernando-Doglio/dp/1783989300)
+- [A Primer on Scientiﬁc Programming with Python](http://www.springer.com/us/book/9783642302930)
+
+#### 파이썬 논문
+- L. Dalcin, P. Kler, R. Paz, and A. Cosimo, Parallel Distributed Computing using Python, Advances in Water Resources, 34(9):1124-1139, 2011. [http://dx.doi.org/10.1016/j.advwatres.2011.04.013](http://dx.doi.org/10.1016/j.advwatres.2011.04.013)
 
 
 > ## 참고 자료 {.prereq}
