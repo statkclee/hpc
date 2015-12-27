@@ -9,7 +9,7 @@ minutes: 10
 >
 
 
-### 자재 명세서 [^1] [^2] [^3] [^4]
+### 자재 명세서 (BOM, Bill-of-Material)
 
 1. 컴퓨터 (4개)
     - [라즈베리 파이 2(알리바마)](http://bit.ly/1NKiK0h): $ 36.88
@@ -33,7 +33,3 @@ minutes: 10
     - [Micro SD Card 8GB](http://bit.ly/1Q6VFHy): $2.29
     - [SanDisk 8GB microSD](http://goo.gl/21Sro2): $5.78
 
-[^1]: [Raspberry Pi B+ Cluster (Super Computer) Part 1](https://www.youtube.com/watch?v=JtX9lVDsqzg)
-[^2]: [Raspberry Pi B+ Cluster (Super Computer) Part 2](https://www.youtube.com/watch?v=vHJ4ZeXT_Zc)
-[^3]: [Raspberry Pi B+ Cluster (Super Computer) Part 3](https://www.youtube.com/watch?v=x3WIp3z218I)
-[^4]: [Raspberry Pi B+ Cluster (Super Computer) Part 4](https://www.youtube.com/watch?v=FGX2s8UMnIE)

@@ -17,9 +17,13 @@ title: $100 달러 오픈 슈퍼 컴퓨터
     - [숫자 (Numbers)](basic-numbers.html)
 1. 슈퍼 컴퓨터 하드웨어
     - [RPi 슈퍼 컴퓨터](rpi-super-computer.html)
-1. 고성능 컴퓨팅 참고서적
+
+
 
 ### 고성능 컴퓨팅 참고 문헌
+
+- [Build a Compact 4 Node Raspberry Pi Cluster](http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/)
+- [Raspberry Pi B+ Cluster (Super Computer)](https://www.youtube.com/watch?v=JtX9lVDsqzg)[^2] [^3] [^4][^5]
 
 #### 1. 파이썬
 - L. Dalcin, P. Kler, R. Paz, and A. Cosimo, Parallel Distributed Computing using Python, Advances in Water Resources, 34(9):1124-1139, 2011. http://dx.doi.org/10.1016/j.advwatres.2011.04.013
@@ -41,3 +45,8 @@ title: $100 달러 오픈 슈퍼 컴퓨터
 >     - [IoT 라즈베리파이](http://raspberry-pi.xwmooc.org/)
 
 [^1]: [고성능 컴퓨팅, High-Performance Computing](https://ko.wikipedia.org/wiki/고성능_컴퓨팅)은 고급 연산 문제를 풀기 위하여 슈퍼컴퓨터 및 컴퓨터 클러스터를 사용하는 것을 말한다.
+
+[^2]: [Raspberry Pi B+ Cluster (Super Computer) Part 1](https://www.youtube.com/watch?v=JtX9lVDsqzg)
+[^3]: [Raspberry Pi B+ Cluster (Super Computer) Part 2](https://www.youtube.com/watch?v=vHJ4ZeXT_Zc)
+[^4]: [Raspberry Pi B+ Cluster (Super Computer) Part 3](https://www.youtube.com/watch?v=x3WIp3z218I)
+[^5]: [Raspberry Pi B+ Cluster (Super Computer) Part 4](https://www.youtube.com/watch?v=FGX2s8UMnIE)
