@@ -17,6 +17,10 @@ minutes: 10
 
 ### 1. 왜 오픈스택인가?
 
+점점 컴퓨팅 패러다임이 급격하게 변화하고 있다. 이제는 웹 인터넷이 누구나 사용하는 기본이 되었고, 이제는 클라우드 컴퓨팅이 대세로 잡아가고 있다.
+
+<img src="fig/openstack-paradigm.png" width="70%" />
+
 
 
 ### 2. 오픈스택 아키텍쳐
@@ -55,7 +59,31 @@ Solinea에서 발표된 오픈스택 개념 아키텍처를 대쉬보드(Horizon
 
 ### 오픈스택 툴체인(Tool-Chain) 
 
-1. 
+
+#### 오픈스택 설치도구 모음
+
+1. 수작업 설치
+1. 쉘스크립트
+1. 설치 도구 활용
+    - [DevStack](http://docs.openstack.org/developer/devstack/): 우분투
+    - [PackStack](https://wiki.openstack.org/wiki/Packstack): 레드햇
+    - [Mirantis Fuel](https://www.mirantis.com/products/mirantis-openstack-software/)
+    - [Ubuntu Juju](http://www.ubuntu.com/download/cloud/install-openstack-with-autopilot)
+1. 형상관리 도구 
+   - [Puppet](https://forge.puppetlabs.com/modules?utf-8=%E2%9C%93&sort=rank&q=openstack)
+   - [Chef](https://docs.chef.io/openstack.html)    
+
+### DevStack 설치
+
+1. 네크워크 환경설치
+1. 사전 준비
+1. DevStack 설치
+1. DevStack 환경설정 파일 변경
+1. OpenStack 설치
+
+All-in-One, 노바 네트워크
+
+
 
 ### 형상 관리(Configuration Management) 
 

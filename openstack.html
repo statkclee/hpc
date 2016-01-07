@@ -53,6 +53,8 @@
 </section>
 <p><a href="http://www.openstack.org/">오픈스택</a>은 클라우드 컴퓨팅 오픈 소스 프로젝트로, 프로그램 가능한 IT 인프라로 클라우드 OS로도 잘 알려져 있다. 2012년 창설된 비영리 단체인 OpenStack Foundation에서 유지, 보수하고 있으며 라이선스는 아파치 라이선스로 상업적 이용도 가능한다. 특히, AMD, 인텔, 캐노니컬, 수세 리눅스, 레드햇, 시스코 시스템즈, 델, HP, IBM, NEC, VM웨어, 야후! 등 150개 이상의 회사가 자발적으로 프로젝트에 참가하고 있으며, 리눅스 기반이며 6개월 마다 시규 버젼을 출시하고 있다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 <h3 id="왜-오픈스택인가">1. 왜 오픈스택인가?</h3>
+<p>점점 컴퓨팅 패러다임이 급격하게 변화하고 있다. 이제는 웹 인터넷이 누구나 사용하는 기본이 되었고, 이제는 클라우드 컴퓨팅이 대세로 잡아가고 있다.</p>
+<p><img src="fig/openstack-paradigm.png" width="70%" /></p>
 <h3 id="오픈스택-아키텍쳐">2. 오픈스택 아키텍쳐</h3>
 <p>오픈스택는 수많은 글로벌 기업의 최고의 엔지니어가 이제 제법 시간을 두고 개발을 진행해서 소프트웨어 자체도 매우 복잡해졌다. 하지만, 오픈스택을 개발할 당시 정한 기본적인 아키텍쳐 결정 사항은 변한 것은 없고, <a href="http://www.solinea.com/">Solinea</a>에서 글리즐리(Grizzly) 버젼<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>으로 작성된 오픈스택 아키텍쳐를 참고 살펴보는 것이 빠른 시간 내에 핵심적인 내용을 섭렵하는데 도움이 될 것이다.</p>
 <aside class="callout panel panel-info">
@@ -81,11 +83,34 @@
 <li>오케스트레이션(Orchestration): 히트(Heat)</li>
 </ol>
 <h4 id="오픈스택-아키텍처그리즐리-버젼">오픈스택 아키텍처(그리즐리 버젼)</h4>
-<p><img src="fig/openstack-architecture-grizzly.png" width="70%" /></p>
+<p><img src="fig/openstack-architecture-grizzly.png" width="100%" /></p>
 <h3 id="오픈스택-툴체인tool-chain">오픈스택 툴체인(Tool-Chain)</h3>
+<h4 id="오픈스택-설치도구-모음">오픈스택 설치도구 모음</h4>
 <ol style="list-style-type: decimal">
-<li></li>
+<li>수작업 설치</li>
+<li>쉘스크립트</li>
+<li>설치 도구 활용
+<ul>
+<li><a href="http://docs.openstack.org/developer/devstack/">DevStack</a>: 우분투</li>
+<li><a href="https://wiki.openstack.org/wiki/Packstack">PackStack</a>: 레드햇</li>
+<li><a href="https://www.mirantis.com/products/mirantis-openstack-software/">Mirantis Fuel</a></li>
+<li><a href="http://www.ubuntu.com/download/cloud/install-openstack-with-autopilot">Ubuntu Juju</a></li>
+</ul></li>
+<li>형상관리 도구</li>
 </ol>
+<ul>
+<li><a href="https://forge.puppetlabs.com/modules?utf-8=%E2%9C%93&amp;sort=rank&amp;q=openstack">Puppet</a></li>
+<li><a href="https://docs.chef.io/openstack.html">Chef</a></li>
+</ul>
+<h3 id="devstack-설치">DevStack 설치</h3>
+<ol style="list-style-type: decimal">
+<li>네크워크 환경설치</li>
+<li>사전 준비</li>
+<li>DevStack 설치</li>
+<li>DevStack 환경설정 파일 변경</li>
+<li>OpenStack 설치</li>
+</ol>
+<p>All-in-One, 노바 네트워크</p>
 <h3 id="형상-관리configuration-management">형상 관리(Configuration Management)</h3>
 <table>
 <thead>
