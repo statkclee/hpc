@@ -59,6 +59,8 @@ Solinea에서 발표된 오픈스택 개념 아키텍처를 대쉬보드(Horizon
 
 ### 오픈스택 툴체인(Tool-Chain) 
 
+DevStack: 단일 노드 All-in-One 설치
+PackStack: [RDO](https://www.rdoproject.org/)
 
 #### 오픈스택 설치도구 모음
 
@@ -95,3 +97,16 @@ All-in-One, 노바 네트워크
 
 Puppet은 운영자 중심에서 출발했고, Chef는 개발자 중심으로 출발했으나, 두가지 툴모두 서로의 장점을 벤치마킹해서 둘다 엇비슷한 기능을 제공하고 있다.
 
+### 자동화 3대 요소
+
+1. 자원 관리(Provisioning)
+    - 프로세서, 메모리, 디스크 크기 등 자원 설정 
+1. 형상 관리(Configuration)
+    - 생성된 가상컴퓨터(VM)에 툴체인 설치: 예를 들어 LAMP, 
+1. 배포 관리(Deployment)
+    - 생성된 가상컴퓨터에 형상 관리를 통해 설치된 각종 툴 체인이 양산단계로 넘겨준다.
+
+#### 형상관리 - 배포관리 툴체인 사례
+
+1. 형상관리: 퍼펫(Puppet)
+1. 배포관리: 엠컬렉티브(mCollective), 히에라(Hiera)
