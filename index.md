@@ -20,6 +20,8 @@ title: $100 달러 오픈 슈퍼 컴퓨터
     - [오픈스택(OpenStack)](openstack.html): 프로그래밍 가능한 IT 인프라
 1. 슈퍼 컴퓨터 하드웨어
     - [RPi 슈퍼 컴퓨터](rpi-super-computer.html)
+1. 클라우드 PaaS
+    - [클라우드 파운드리-블루믹스](bluemix.html)
 
 
 
