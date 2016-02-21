@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: $100 달러 오픈 슈퍼 컴퓨터</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-59802572-15', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://xwmooc.net" title="xwMOOC">
+          <img alt="xwMOOC banner" src="img/xwMOOC.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h1 class="title">$100 달러 오픈 슈퍼 컴퓨터</h1>
+          <h2 class="subtitle">성능시험1 - 간단한 파이썬 코드</h2>
+<p>간단한 파이썬 코드를 통해 라즈베리파이 클러스터 MPI 테스트를 실시한다.</p>
+<h3 id="mpi-연결상태-확인-및-테스트-준비">MPI 연결상태 확인 및 테스트 준비</h3>
+<p>먼저, MPI 확인을 위해 서버로 작동하는 pi01에 ssh 접속한다.</p>
+<ul>
+<li>모든 라즈베리파이의 MPI(병렬)연결을 확인한다.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ mpiexec <span class="op">-</span>f machinefile <span class="op">-</span>n <span class="dv">4</span> hostname</code></pre></div>
+<p><code>machinefile</code> 에 기록된 ip에 대해 <code>hostname</code> 을 4개 출력하는 명령어. 모든 라즈베리파이가 정상적으로 연결되었다면 모든 라즈베리파이의 <code>hostname</code> 이 아래 사진과 같이 출력된다.</p>
+<p><img src="fig/rpi-MPI_4connected.png" alt="라즈베리파이 MPI 연결확인" width="50%" /></p>
+<ul>
+<li>테스트용 파이썬파일(example.py)를 만든다.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ nano example.py</code></pre></div>
+<pre class="output"><code># example.py 파이썬 코드
+import timeit
+start = timeit.default_timer()
+a=4000000
+print a
+b=12+5
+print b
+c=b*a
+print c
+stop = timeit.default_timer()
+print stop - start</code></pre>
+<p><code>timeit</code> 라이브러리를 가져와서 작업의 시작과 끝 사이 걸린시간을 출력함으로써 라즈베리파이 클러스터 갯수에 따른 출력 시간을 관측할 수 있다.</p>
+<ul>
+<li>파이썬파일(example.py)을 모든 라즈베리파이에 복사한다.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ scp <span class="op">-</span>r example.py <span class="fl">192.168.1</span>.?:<span class="op">/</span>home<span class="op">/</span>pi</code></pre></div>
+<p>여기서 <code>192.168.1.?</code> 은 서버pi에 존재하는 <code>example.py</code> 을 복사하고자 하는 라즈베리파이의 ip이다. 해당 라즈베리파이의 <code>/home/pi</code> 디렉토리로 파일을 복사한다.</p>
+<h3 id="python-테스트-결과">python 테스트 결과</h3>
+<ul>
+<li>파이썬 동작에 한 개의 라즈베리파이만 사용.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ python example.py</code></pre></div>
+<p><img src="fig/rpi-pythontest_one.png" alt="라즈베리파이 MPI 연결확인" width="50%" /></p>
+<ul>
+<li>파이썬 동작에 라즈베리파이 두대 사용.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ mpiexec <span class="op">-</span>f machinefile2 <span class="op">-</span>n <span class="dv">2</span> python example.py</code></pre></div>
+<p>ip가 두개만 기록된 <code>machinefile2</code> 에 대해 세번의 결과를 출력한다.</p>
+<p><img src="fig/rpi-pythontest_two.png" alt="라즈베리파이 MPI 연결확인" width="50%" /></p>
+<ul>
+<li>파이썬 동작에 세 개, 네 개의 라즈베리파이 사용.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ mpiexec <span class="op">-</span>f machinefile3 <span class="op">-</span>n <span class="dv">2</span> python example.py
+$ mpiexec <span class="op">-</span>f machinefile <span class="op">-</span>n <span class="dv">2</span> python example.py</code></pre></div>
+<p><img src="fig/rpi-pythontest_onetofour.png" alt="라즈베리파이 MPI 연결확인" width="50%" /></p>
+<h3 id="파이썬-테스트-결과-분석">파이썬 테스트 결과 분석</h3>
+<ul>
+<li>라즈베리파이 갯수에 따른 작업 시간(sec)</li>
+</ul>
+<p><img src="fig/rpi-pythontest_Tchart.png" alt="라즈베리파이 MPI 연결확인" width="50%" /></p>
+<ul>
+<li>라즈베리파이 갯수에 따른 작업 속도(배)</li>
+</ul>
+<p><img src="fig/rpi-pythontest_Vchart.png" alt="라즈베리파이 MPI 연결확인" width="50%" /></p>
+<ul>
+<li><p>확인된 사항</p>
+<ul>
+<li>한대와 두대로 파이썬코드를 동작시켰을 떄는 테스트 시간감축이 확인되었지만, 3대부터는 비슷한 동작 시간을 출력하는 한계점이 발견되었다.</li>
+<li>해당 파이썬 샘플이 2대 이상의 라즈베리파이 클러스터에서는 차이점을 출력하지 못했으므로 라즈베리파이 갯수 증가에 따른 객관적 성능출력이 필요하다.</li>
+</ul></li>
+</ul>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://xwmooc.net">xwMOOC</a>
+        <a class="label swc-blue-bg" href="https://github.com/statkclee/hpc">Source</a>
+        <a class="label swc-blue-bg" href="mailto:i@xwmooc.net">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+  </body>
+</html>

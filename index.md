@@ -12,24 +12,28 @@ title: $100 달러 오픈 슈퍼 컴퓨터
 
 ### 고성능 컴퓨팅[^1] 개발
 
+1. [슈퍼 컴퓨터 하드웨어](rpi-super-computer.html) [^xwMOOC-intern]
+    - [RPi 슈퍼 컴퓨터 자재명세서](rpi-super-bom.html)
+    - [라즈베리파이 클러스터(병렬연결) - 제작매뉴얼](rpi-manual.html)
+        + MPI 프로그램을 통해 모든 라즈베리파이를 하나로 병렬연결한다.
+    - [네트워크 관계없이 외부에서 라즈베리파이 접속하기](rpi-network.html)
+        + 내부 ip 설정 및 고정 ip 지정
+        + weaved : 외부에서 포트를 통한 라즈베리파이 접속 프로그램
+    - [성능시험1 - 간단한 파이썬 코드](rpi-benchmark-simple.html)
+        + 간단한 파이썬 코드를 통해 병렬컴퓨팅 작업을 테스트한다.
+    - [성능시험2 - HPL을 통한 객관적 성능](rpi-benchmark-hpl.html)
+        + HPL(High Performance Linpack)을 통해 제작한 슈퍼컴퓨터의 성능을 객관적으로 출력하여 비교한다.
+    - [tcp socket을 통한 실시간 연결상태 체크](rpi-monitoring.html)
+        + 많은 라즈베리파이의 실시간 관리를 가능하게 한다.
 1. 고성능 컴퓨팅 기초
     - [숫자 (Numbers)](basic-numbers.html)
-1. 슈퍼컴퓨터 접속
     - [원격 작업 (Working Remotely)](basic-ssh.html)
 1. 클라우드 OS 
     - [오픈스택(OpenStack)](openstack.html): 프로그래밍 가능한 IT 인프라
-1. 슈퍼 컴퓨터 하드웨어
-    - [RPi 슈퍼 컴퓨터](rpi-super-computer.html)
-1. 클라우드 PaaS
-    - [클라우드 파운드리-블루믹스](bluemix.html)
-
+    - [클라우드 파운드리-블루믹스](bluemix.html)    
 
 
 ### 고성능 컴퓨팅 참고 문헌
-
-#### 유튜브 동영상
-- [Build a Compact 4 Node Raspberry Pi Cluster](http://makezine.com/projects/build-a-compact-4-node-raspberry-pi-cluster/)
-- [Raspberry Pi B+ Cluster (Super Computer)](https://www.youtube.com/watch?v=JtX9lVDsqzg)[^2] [^3] [^4] [^5]
 
 #### 파이썬 교재
 - [Parallel Programming with Python 2014](http://www.amazon.com/Parallel-Programming-Python-Jan-Palach/dp/1783288396)
@@ -54,9 +58,6 @@ title: $100 달러 오픈 슈퍼 컴퓨터
 > - [$100 오픈 컴퓨터](http://computer.xwmooc.org/)
 >     - [IoT 라즈베리파이](http://raspberry-pi.xwmooc.org/)
 
+[^xwMOOC-intern]: [xwMOOC 개인용슈퍼컴퓨터 개발 프로젝트 - xwMOOC 인턴(서상범)](http://www.landmarkonme.com/)
 [^1]: [고성능 컴퓨팅, High-Performance Computing](https://ko.wikipedia.org/wiki/고성능_컴퓨팅)은 고급 연산 문제를 풀기 위하여 슈퍼컴퓨터 및 컴퓨터 클러스터를 사용하는 것을 말한다.
 
-[^2]: [Raspberry Pi B+ Cluster (Super Computer) Part 1](https://www.youtube.com/watch?v=JtX9lVDsqzg)
-[^3]: [Raspberry Pi B+ Cluster (Super Computer) Part 2](https://www.youtube.com/watch?v=vHJ4ZeXT_Zc)
-[^4]: [Raspberry Pi B+ Cluster (Super Computer) Part 3](https://www.youtube.com/watch?v=x3WIp3z218I)
-[^5]: [Raspberry Pi B+ Cluster (Super Computer) Part 4](https://www.youtube.com/watch?v=FGX2s8UMnIE)
