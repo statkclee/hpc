@@ -1,0 +1,22 @@
+---
+layout: page
+title: 고성능 컴퓨팅(HPC)
+subtitle: 컴파일, 설치, 호출
+output:
+  html_document: 
+    toc: yes
+    toc_float: true
+    highlight: tango
+    code_folding: hide
+mainfont: NanumGothic
+---
+
+
+```{r setOptions, message=FALSE, include=FALSE}
+source("tools/chunk-options.R")
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+# 컴퓨팅 일반
+
+# 진화...
