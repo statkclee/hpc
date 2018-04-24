@@ -4,7 +4,7 @@ title: 고성능 컴퓨팅(HPC)
 ---
 
 
-1. 고성능 컴퓨팅 기초    
+1. [고성능 컴퓨팅 기초](hpc-basic.html)
     - [숫자 (Numbers)](basic-numbers.html)
     - [원격 작업 (Working Remotely)](basic-ssh.html)
     - [자유 소프트웨어와 오픈 소스 소프트웨어에 대한 철학](http://statkclee.github.io/open-source-for-business/ch01-philosophy.html)
