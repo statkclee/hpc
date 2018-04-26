@@ -18,9 +18,11 @@ source("tools/chunk-options.R")
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
 
-# 병렬 컴퓨팅 [^swc-hpc-intro] {#define-parallel-computing}
+# 병렬 컴퓨팅 [^swc-hpc-intro] [^hpc-concept] {#define-parallel-computing}
 
 [^swc-hpc-intro]: [HPC: Analysis pipelines with Python -Introduction to parallel computing](https://hpc-carpentry.github.io/hpc-python/06-parallel/)
+
+[^hpc-concept]: [Introduction to Parallel Computing, Author: Blaise Barney, Lawrence Livermore National Laboratory](https://computing.llnl.gov/tutorials/parallel_comp/)
 
 병렬 컴퓨팅(parallel computing)의 기본 개념은 한번에 하나씩 처리하게 되면 상당시간 걸릴 작업을 작업을 동시에 실행킬 수 있도록 작업을 나누어서 짧은 시간에
 전체 작업을 완료하는 것이다.
@@ -28,6 +30,8 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 방의 4면에 도배를 하거나 페인트를 칠하는 것을 예로 들어보자. 도배나 페이트 작업의 경우 문제를 서로 다른 작업 4개를 나눌 수 있다; 즉, 방의 각 면을 도배나 페이트 칠하는 작업.
 원칙적으로 보면, 각 작업은 독립적이라 한면을 도배한 다음에 다른 면을 도배할 필요는 없다. 그렇다고 각 도배 작업을 한번에 혹은 병렬로 실행될 수 있다는 것을 의미하지도 않는다.
 각 도배 작업을 수행하는데 딸린 자원에 따라 달라질 수도 있다.
+
+<img src="fig/serial-vs-parallel.png" alt="순차 vs 병렬" width="100%" />
 
 ## 동시 실행과 병렬 실행 {#concurrent-vs-parallel}
 
@@ -37,6 +41,8 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 
 HPC 측면에서 본다면, 도배공은 컴퓨터 CPU 코어 갯수를 나타낸다. 이용가능한 CPU 코어 갯수가 병렬로 수행가능한 최대 작업 갯수를 결정한다.
 하지만, 동시에 시작될 수 있는 동시 작업(concurrent tasks) 갯수는 한정되지 않는다.
+
+<img src="fig/multicore-cluster.png" alt="멀티코어 vs 분산 컴퓨터" width="100%" />
 
 ## 동기실행과 비동기 실행 {#sync-vs-async}
 
@@ -63,6 +69,8 @@ HPC 측면에서 본다면, 작업자의 서로 다른 페이트통은 클러스
 **조밀한(fine-grained)** 병렬 프로그램은 작업간에 상당히 많은 커뮤니케이션과 동기화가 필요한 바면,
 **성긴(coarse-grained)** 병렬 프로그램은 거의 커뮤니케이션이 필요하지 않는다.
 *쑥스럽게/대량(embarrassingly/massively) 병렬 프로그램*은 완전히 모든 작업을 독립적으로 실행된다(커뮤니케이션이 필요없음).
+
+<img src="fig/data-shared-memory.png" alt="공유 메모리" width="100%" />
 
 ## 프로세스 vs. 쓰레드 {#process-vs-thread}
 
@@ -115,6 +123,8 @@ R에서는 `foreach` 등 다양한 팩키지가 있지만,  `multicore`, `doMC` 
 [MPI](https://www.open-mpi.org/), [Hadoop](http://hadoop.apache.org/), [Spark](https://spark.apache.org/)가 빅데이터를 처리하는데 
 가장 널리 사용되는 프레임워크다.
 
+<img src="fig/openmp-mpi-cuda.png" alt="openMP, MPI, CUDA" width="100%" />
+
 ## 연쇄 작업(serial farming) {#serial-farming} 
 
 동일한 연산작업을 다수 반복하는 경우가 많다. 아마도, 서로 다른 표본 10개에 대해서 같은 작업을 실행하는 경우가 이에 해당된다.
@@ -127,3 +137,5 @@ R에서는 `foreach` 등 다양한 팩키지가 있지만,  `multicore`, `doMC` 
 
 이러한 기법을 **연쇄 작업(serial farming)**이라고 부르는데 [snakemake](http://snakemake.readthedocs.io/en/stable/)를 사용해서 
 독립적인 수백 혹은 수천가지 작업은 아니지만, 수십가지 병렬 작업을 무난히 처리할 수 있다.
+
+<img src="fig/snakemake.png" alt="snakemake" width="100%" />
